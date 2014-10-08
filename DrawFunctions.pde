@@ -1,3 +1,8 @@
+// Helper functions - these just move things out of methods that would otherwise be all sorts
+// of full with things. If I were doing a bigger project, I'd likely make this a class and
+// have it fed the tool number and spit out output to the desired methods.
+
+
 // Tool functions- These functions all have different instructions for 
 // how to draw when the mouse button is depressed and the mouse moved.
 // please play with them plenty!! =) Check the descriptions in the
@@ -96,4 +101,5 @@ void tool9(float x,float y, float px, float py)
   line(width/2+((width/2)-px),height/2+((height/2)-py),width/2+((width/2)-x),height/2+((height/2)-y));
   return;
 }
+
 

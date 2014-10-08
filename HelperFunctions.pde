@@ -1,7 +1,37 @@
-void toolPicker() 
-// Deals with handling what tool is being used to draw. I could have done this with iteration
-// if I were less lazy, but at least I've got it all in one spot in this function here.
+void photoIcon() {
+  // This function decides which image to draw for the screenshot icon on the
+  // application, based on the state of the photoTaken bool. it uses a counter that
+  // it updates once per call to the function, which is itself called once per
+  // draw() refresh, so it in essence is a way of useing the draw as a timer to show 
+  // the 'flash' version of the camera icon. 
+  
+  // This tells the program what to do if the counter is above the max amount I 
+  // decidided on for a pause. In this case, it will set the photoTaken Bool to
+  // false, and reset the counter.
+  if (counter > 40)
+  {
+    photoTaken = false;
+    counter = 0;
+  }
+  
+  // what to do if the bool is true and the counter is less then 0 -
+  // which is display the dummy button icon for the 'flash' camera
+  // and incriment the counter once per call.
+  if (photoTaken == true)
+  {
+    screenShotTaken.display();
+    counter += 1;
+  }
+  
+  // what to do if the bool is false. This is pretty much what should be considered the default.
+  if (photoTaken == false)
+  {
+     screenShotButton.display();
+  }
+}
 
+void toolPicker() 
+// Deals with handling what tool is being used to draw. 
 
 {
   // This logic constrains the draw to within the bordered area. 
@@ -121,34 +151,4 @@ void toolPicker()
 
 }
   
-void photoIcon() {
-  // This function decides which image to draw for the screenshot icon on the
-  // application, based on the state of the photoTaken bool. it uses a counter that
-  // it updates once per call to the function, which is itself called once per
-  // draw() refresh, so it in essence is a way of useing the draw as a timer to show 
-  // the 'flash' version of the camera icon. 
-  
-  // This tells the program what to do if the counter is above the max amount I 
-  // decidided on for a pause. In this case, it will set the photoTaken Bool to
-  // false, and reset the counter.
-  if (counter > 40)
-  {
-    photoTaken = false;
-    counter = 0;
-  }
-  
-  // what to do if the bool is true and the counter is less then 0 -
-  // which is display the dummy button icon for the 'flash' camera
-  // and incriment the counter once per call.
-  if (photoTaken == true)
-  {
-    screenShotTaken.display();
-    counter += 1;
-  }
-  
-  // what to do if the bool is false. This is pretty much what should be considered the default.
-  if (photoTaken == false)
-  {
-     screenShotButton.display();
-  }
-}
+

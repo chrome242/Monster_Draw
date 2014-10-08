@@ -26,14 +26,14 @@ class RectButton
   // image files
   PImage imageSheet, finalImage;
   
-  // Audio file
-  AudioSample audioFile;
-  
+  // Audio file and assoicated int
+  AudioPlayer audioFile;
+  int volume;
   
   // Constructor
   // params are drawCenter X, drawCenterY, Width, Height, imageFileName, FramesInFile, AudioFileName
   // use is as varname = new RectButton(X,Y, W, H, Image, frames, Sound)
-  RectButton (int centerX, int centerY, int disWidth, int disHeight, String iFile, int frames, String aFile)
+  RectButton (int centerX, int centerY, int disWidth, int disHeight, String iFile, int frames, String aFile, int vol)
   { 
     // Assignments
     buttonX = centerX;
@@ -42,7 +42,10 @@ class RectButton
     buttonHeight = disHeight;
     imageFile = iFile;
     buttonFrames = frames -1;
-    audioFile = minim.loadSample(aFile);
+    // Audio stuff specific to the Maxim library.
+    audioFile = maxim.loadFile(aFile);
+    audioFile.setLooping(false);
+    volume = vol;
     
     // Image Construction Goodies:
     // Load Image file for sprite sheet
@@ -93,7 +96,11 @@ class RectButton
       // play the button audio
       if (soundOn)
       {
-      audioFile.trigger();
+      // These let the maxim library play audio. the volume could be set above, but I might
+      // want to let that be user changed in a later build
+      audioFile.volume(volume);
+      audioFile.cue(0);
+      audioFile.play();
       }
     }
     
@@ -130,13 +137,14 @@ class CircleButton
   // image files
   PImage imageSheet, finalImage;
   
-  // Audio file
-  AudioSample audioFile;
+  // Audio file and int for volume
+  AudioPlayer audioFile;
+  int volume;
   
   // Constructor
   // params are drawCenter X, drawCenterY, Radius, imageFileName, FramesInFile, AudioFileName
   // use is as varname = new CircleButton(X, Y, R, Image, frames, Sound)
-  CircleButton (int centerX, int centerY, int disRad, String iFile, int frames, String aFile)
+  CircleButton (int centerX, int centerY, int disRad, String iFile, int frames, String aFile, int vol)
   {
     // Assignments
     buttonX = centerX;
@@ -146,7 +154,11 @@ class CircleButton
     buttonHeight = buttonRadius *2;
     imageFile = iFile;
     buttonFrames = frames -1;
-     audioFile = minim.loadSample(aFile);
+    
+    // For the Maxim library
+    audioFile = maxim.loadFile(aFile);;
+    audioFile.setLooping(false);
+    volume = vol;
     
     // Image Construction Goodies:
     // Load Image file for sprite sheet
@@ -196,7 +208,11 @@ class CircleButton
       // play the button audio
       if (soundOn)
       {
-      audioFile.trigger();
+      // These let the maxim library play audio. the volume could be set above, but I might
+      // want to let that be user changed in a later build
+      audioFile.volume(volume);
+      audioFile.cue(0);
+      audioFile.play();
       }
       
     }
